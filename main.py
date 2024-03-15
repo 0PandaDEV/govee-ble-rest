@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import subprocess
 import typing
+import uvicorn
 
 app = FastAPI()
 
@@ -150,3 +151,6 @@ async def perform_action(mac_address: str, action: DeviceAction):
                 status_code=400, detail="Invalid value for setColorMusic")
     else:
         raise HTTPException(status_code=400, detail="Action not supported")
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
